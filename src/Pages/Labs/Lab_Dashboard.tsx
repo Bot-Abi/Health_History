@@ -1,17 +1,17 @@
 import React, { useEffect,useState } from "react";
-import Loader from "../../../Components/Loader/index";
-import CustomPagination from "../../../Components/Pagination/CustomPagination";
+import Loader from "../../Components/Loader/index";
+import CustomPagination from "../../Components/Pagination/CustomPagination";
 import { Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { Dropdown } from "antd";
 import { MenuProps, Switch } from "antd";
-import ModalContainer from "../../../Components/ModalContainer/ModalContainer";
-import Input from "../../../Components/Input/Input";
+import ModalContainer from "../../Components/ModalContainer/ModalContainer";
+import Input from "../../Components/Input/Input";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Radio } from "antd";
 import { get } from "http";
-import { ReportAPI } from "../../../apis/reportapi";
+import { ReportAPI } from "../../apis/reportapi";
 
 
 
@@ -29,7 +29,7 @@ interface ReportData {
 //   }
 
 
-const Doc_Dashboard = () => {
+const Lab_Dashboard = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [loading, setLoading] = React.useState(false);
   const [reportData, setReportData] = useState<any>([]);
@@ -124,19 +124,34 @@ const Doc_Dashboard = () => {
   };
 
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (e:any) => {
+      setSelectedFile(e.target.files[0]);
+  };
 
   useEffect(() => {
     getReportDoc(phoneNumber);
   });
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const handleSubmit = () => {
+    if (selectedFile) {
+        // Simulate file upload process
+        setTimeout(() => {
+            setUploadSuccess(true);
+        }, 1000); // Simulate a 1-second upload time
+    }
+    setFormSubmitted(true);
+};
 
   return (
     <div className="mt-[20px] w-[100%] overflow-x-scroll md:overflow-hidden">
       <div className="mb-[20px] flex gap-[15px]">
-        <p className="font-semibold text-[20px]">DOCTOR</p>
+        <p className="font-semibold text-[20px]">LAB REPORT</p>
       </div>
       <div className="mt-[30px]">
           <Input
-            label="Enter Phone number of whose report is to be fetched"
+            label="Enter Phone number of whose report is to be uploaded"
             name="phone"
             type="text"
             placeholder="Enter patient's Phone number"
@@ -144,10 +159,17 @@ const Doc_Dashboard = () => {
             value={phoneNumber}
             handleChange={(e:any) => setPhoneNumber(e.target.value)}
           />
+            <input 
+                type="file" 
+                accept="application/pdf" 
+                onChange={handleFileChange} 
+                className="mt-[15px] block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-[12px] file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+            />
         <button
-           onClick={() => {
-            setFormSubmitted(true);
-          }}
+        //    onClick={() => {
+        //     setFormSubmitted(true);
+        //   }}
+          onClick={handleSubmit}
           className="bg-[#7F32AC] text-[#fff] text-[14px] px-[45px] mx-auto font-semibold rounded-[12px] py-[8px] mt-[15px]"
         >
           Submit
@@ -157,10 +179,15 @@ const Doc_Dashboard = () => {
         >
           Cancel
         </button>
+        {uploadSuccess && (
+                <div className="mt-[15px] p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-[12px] border border-green-300" role="alert">
+                    <span className="font-semibold">Success:</span> File uploaded successfully!
+                </div>
+            )}
       </div>
       
       <div className="mt-[30px]"> 
-      {formSubmitted && (
+      {/* {formSubmitted && (
       <div>
           <p className="font-semibold text-[15px]">Name of patient: {reportData.name}</p>
           <p className="font-semibold text-[15px] ">Age: {reportData.age}</p>
@@ -169,11 +196,11 @@ const Doc_Dashboard = () => {
           <p className="font-semibold text-[15px] mb-[10px] ">Reports:</p>
           <Table columns={columns} dataSource={reportData.reports} pagination={false} />
       </div>
-      )}
+      )} */}
       </div>
       
     </div>
   );
 };
 
-export default Doc_Dashboard;
+export default Lab_Dashboard;

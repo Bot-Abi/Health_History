@@ -18,9 +18,15 @@ import {
   ROOT,
   PATIENT_DASHBOARD_REPORT,
   LOGINPHONE,
-  DOC_DASHBOARD
+  DOC_DASHBOARD,
+  LOGINDOC,
+  LABLOGIN,
+  LAB_DASHBOARD
 } from "./Constant";
 import LoginPhone from "../../Pages/Patients/Auth/LoginPhone";
+import LoginDoc from "../../Pages/Doctors/Auth/LoginDoc";
+import LoginLab from "../../Pages/Labs/LoginLab";
+import Lab_Dashboard from "../../Pages/Labs/Lab_Dashboard";
 export const RouterConfig = () => {
   
 
@@ -29,6 +35,8 @@ export const RouterConfig = () => {
       <Route path={ROOT} element={<Home />} />
       <Route path={LOGIN} element={<Login />} />
       <Route path={LOGINPHONE} element={<LoginPhone/>}/>
+      <Route path={LOGINDOC} element={<LoginDoc/>}/>
+      <Route path={LABLOGIN} element={<LoginLab/>}/>
       {/* <Route path={REGISTER} element={<Register />} /> */}
       {/* <Route path={VERIFY_OTP} element={<VerifyOtp/>}/>
       <Route path={RESET} element={<Reset/>}/>
@@ -37,6 +45,7 @@ export const RouterConfig = () => {
              <Route path={DASHBOARD_HOME} element={<Dashboard/>}></Route>
              <Route path={PATIENT_DASHBOARD_REPORT} element={<Pat_Dash_Rep/>}></Route>
              <Route path={DOC_DASHBOARD} element={<Doc_Dashboard/>}></Route>
+             <Route path={LAB_DASHBOARD} element={<Lab_Dashboard/>}></Route>
       </Route>
     </Routes>
   );

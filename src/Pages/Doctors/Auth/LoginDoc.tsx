@@ -5,7 +5,7 @@ import Loader from '../../../Components/Loader/index'
 import { useNavigate } from 'react-router-dom'
 import OtpInput from '../../../Components/OtpInput/OtpInput'
 import { AuthAPI } from '../../../apis/authAPI'
-import { LOGIN, PATIENT_DASHBOARD_REPORT } from '../../../Components/navigation/Constant'
+import { DOC_DASHBOARD, LOGIN, PATIENT_DASHBOARD_REPORT } from '../../../Components/navigation/Constant'
 
 const img = require('../../../images/kids.jpeg')
 
@@ -14,7 +14,7 @@ const initialErrorState = {
     msg: ''
 }
 
-const LoginPhone = () => {
+const LoginDoc = () => {
 
     const [patient, setPatient] = React.useState<any>(localStorage.getItem('registeredUser') ? JSON.parse(localStorage.getItem('registeredUser') || '') : null)
     const [email, setEmail] = React.useState('')
@@ -28,7 +28,7 @@ const LoginPhone = () => {
     const [otp, setOtp] = useState('');
     
     const handleLogin = async () => {
-        navigate(PATIENT_DASHBOARD_REPORT)
+        navigate(DOC_DASHBOARD)
         // console.log(patient);
         // try {
         //     setLoading(true)
@@ -99,7 +99,7 @@ const LoginPhone = () => {
                     </h3>
                     
                     <div className='flex flex-col gap-[10px] w-[100%] mt-[30px] mx-auto'>
-                        <Input label="Phone number" name="email" type="number" placeholder="Enter your Phone number" className=" rounded-[12px]" value={email} handleChange={(e: any) => setEmail(e.target.value)}/>
+                        <Input label="Enter your Doc ID" name="email" type="number" placeholder="Enter your Doc ID" className=" rounded-[12px]" value={email} handleChange={(e: any) => setEmail(e.target.value)}/>
                          {/* {
                             otpSent ? <>
                                 < OtpInput value={otp} valueLength={4} onChange={(value:any) => setOtp(value)} />
@@ -145,4 +145,4 @@ const LoginPhone = () => {
     )
 }
 
-export default LoginPhone
+export default LoginDoc

@@ -79,30 +79,86 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
   const [reportData, setReportData] = useState<any>([]);
+  // const getReport = async (userid:any) => {
+  //   try {
+  //       setLoading(true);
+  //       const reportData = await ReportAPI.getReport(userid);
+  //       console.log("Report Data:", reportData);
+  //       setReportData(reportData);
+
+  //     } catch (err) {
+  //       console.log("Some error occurred:", err);
+  //       // const errMsg =
+  //       //   err?.response?.data?.message || err?.message || "Something went wrong";
+  //       // toast.error(errMsg);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  // };
+  const getManualReportData = () => {
+    return [
+      {
+        key: '1',
+        date: '2024-07-01',
+        test_name: 'Blood Test',
+        lab_name: 'LabCorp',
+        report_pdf: 'https://example.com/report1.pdf',
+      },
+      {
+        key: '2',
+        date: '2024-07-02',
+        test_name: 'Urine Test',
+        lab_name: 'Quest Diagnostics',
+        report_pdf: 'https://example.com/report2.pdf',
+      },
+      {
+        key: '3',
+        date: '2024-07-03',
+        test_name: 'X-Ray',
+        lab_name: 'Radiology Associates',
+        report_pdf: 'https://example.com/report3.pdf',
+      },
+      {
+        key: '4',
+        date: '2024-07-04',
+        test_name: 'MRI Scan',
+        lab_name: 'Imaging Center',
+        report_pdf: 'https://example.com/report4.pdf',
+      },
+      {
+        key: '5',
+        date: '2024-07-05',
+        test_name: 'COVID-19 Test',
+        lab_name: 'HealthLab',
+        report_pdf: 'https://example.com/report5.pdf',
+      },
+    ];
+  };
   const getReport = async (userid:any) => {
     try {
-        setLoading(true);
-        const reportData = await ReportAPI.getReport(userid);
-        console.log("Report Data:", reportData);
-        setReportData(reportData);
-
-      } catch (err) {
-        console.log("Some error occurred:", err);
-        // const errMsg =
-        //   err?.response?.data?.message || err?.message || "Something went wrong";
-        // toast.error(errMsg);
-      } finally {
-        setLoading(false);
-      }
+      setLoading(true);
+      const manualData = getManualReportData();
+      console.log("Report Data:", manualData);
+      setReportData(manualData);
+    } catch (err) {
+      console.log("Some error occurred:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
+  
+
+  // useEffect(() => {
+  //   getReport(user.uid);
+  //   const intervalId = setInterval(() => {
+  //     getReport(user.uid);
+  //   }, 500);
+  //   return () => clearInterval(intervalId);
+  // }, [user.uid]);
   useEffect(() => {
-    getReport(user.uid);
-    const intervalId = setInterval(() => {
-      getReport(user.uid);
-    }, 500);
-    return () => clearInterval(intervalId);
-  }, [user.uid]);
+    getReport(null); 
+  }, []);
 
   const [search, setSearch] = useState("");
   const filterData = () => {
@@ -149,7 +205,7 @@ const Dashboard = () => {
       ) : (
         <Table columns={columns} dataSource={filterData()} pagination={false} />
       )}
-    <div className="w-[100%] mt-[30px] items-end justify-end flex">
+    {/* <div className="w-[100%] mt-[30px] items-end justify-end flex">
       <CustomPagination
         total={pagination?.total}
         current={currentPage}
@@ -158,7 +214,7 @@ const Dashboard = () => {
           setPageSize(pageSize);
         }}
       />
-    </div>
+    </div> */}
     </div>
     
   );

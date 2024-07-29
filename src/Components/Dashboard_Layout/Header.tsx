@@ -18,7 +18,7 @@ export default function Header() {
   const logout = async () => {
     try {
       localStorage.removeItem("user");
-      navigate(LOGIN);
+      navigate(ROOT);
     } catch (err: any) {
       console.log(err);
       const errMsg = err?.response?.data?.message || "Something went wrong";

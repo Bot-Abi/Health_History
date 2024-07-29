@@ -1,20 +1,20 @@
 import React, { useEffect,useState } from 'react'
-import Input from '../../../Components/Input/Input'
+import Input from '../../Components/Input/Input'
 import { toast, ToastContainer } from 'react-toastify'
-import Loader from '../../../Components/Loader/index'
+import Loader from '../../Components/Loader/index'
 import { useNavigate } from 'react-router-dom'
-import OtpInput from '../../../Components/OtpInput/OtpInput'
-import { AuthAPI } from '../../../apis/authAPI'
-import { LOGIN, PATIENT_DASHBOARD_REPORT } from '../../../Components/navigation/Constant'
+import OtpInput from '../../Components/OtpInput/OtpInput'
+import { AuthAPI } from '../../apis/authAPI'
+import { DOC_DASHBOARD, LAB_DASHBOARD, LOGIN, PATIENT_DASHBOARD_REPORT } from '../../Components/navigation/Constant'
 
-const img = require('../../../images/kids.jpeg')
+const img = require('../../images/kids.jpeg')
 
 const initialErrorState = {
     error: false,
     msg: ''
 }
 
-const LoginPhone = () => {
+const LoginLab = () => {
 
     const [patient, setPatient] = React.useState<any>(localStorage.getItem('registeredUser') ? JSON.parse(localStorage.getItem('registeredUser') || '') : null)
     const [email, setEmail] = React.useState('')
@@ -28,7 +28,7 @@ const LoginPhone = () => {
     const [otp, setOtp] = useState('');
     
     const handleLogin = async () => {
-        navigate(PATIENT_DASHBOARD_REPORT)
+        navigate(LAB_DASHBOARD)
         // console.log(patient);
         // try {
         //     setLoading(true)
@@ -99,7 +99,7 @@ const LoginPhone = () => {
                     </h3>
                     
                     <div className='flex flex-col gap-[10px] w-[100%] mt-[30px] mx-auto'>
-                        <Input label="Phone number" name="email" type="number" placeholder="Enter your Phone number" className=" rounded-[12px]" value={email} handleChange={(e: any) => setEmail(e.target.value)}/>
+                        <Input label="Enter your Lab ID" name="email" type="number" placeholder="Enter your Lab ID" className=" rounded-[12px]" value={email} handleChange={(e: any) => setEmail(e.target.value)}/>
                          {/* {
                             otpSent ? <>
                                 < OtpInput value={otp} valueLength={4} onChange={(value:any) => setOtp(value)} />
@@ -145,4 +145,4 @@ const LoginPhone = () => {
     )
 }
 
-export default LoginPhone
+export default LoginLab

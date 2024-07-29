@@ -36,7 +36,7 @@ export default function Sidebar() {
       {user.accessLevel === 'patient' && (
         <>
         <div className='tab-item' onClick={() => { navigate(DASHBOARD_HOME);}}>Dashboard</div>
-        <div className='tab-item' onClick={() => { navigate(PATIENT_DASHBOARD_REPORT);}}>My Reports</div>
+        {/* <div className='tab-item' onClick={() => { navigate(PATIENT_DASHBOARD_REPORT);}}>My Reports</div> */}
         </>
       )}
 

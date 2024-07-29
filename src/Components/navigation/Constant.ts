@@ -19,9 +19,12 @@ export const ADMIN="/dashboard/admin";
 
 
 //DOCTOR
+export const LOGINDOC = "/doctor/login";
 export const DOC_DASHBOARD = "/dashboard/doctor";
 
-
+//LAB
+export const LABLOGIN="/lab/login"
+export const LAB_DASHBOARD = "/dashboard/lab";
 
 export const FORGOT = "/forgot";
 export const RESET = "/reset";
